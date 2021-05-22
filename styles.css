@@ -1,0 +1,129 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vh;
+    height: 100vh;
+}
+
+h1{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vh;
+    height: 10vh;
+}
+
+#container {
+    width: 800px;
+    max-width: 80%;
+    border-radius: 85px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+}
+
+.question {
+    display: grid;
+    grid-template: repeat(2, auto);
+    gap: 10px;
+    margin: 30px 20px;
+}
+
+ .correct {
+    /*font-size: ;*/
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.wrong {
+    /*font-size: ;*/
+    margin: auto;
+    width: 50%;
+    border: 3px solid red;
+    padding: 10px;
+}
+
+.btn-grid, .nextQuestion {
+    display: grid;
+    grid-template: repeat(2, auto);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.nextQuestion {
+    margin: 30px 20px;
+    font-weight: bold;
+}
+
+/* .btn {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px 10px;
+    outline: none;
+} */
+
+.start-btn next-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10 px 20 px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.score {
+    margin: 30px 20px;
+    font-weight: bold;
+}
+
+.game-over h2 {
+    margin: 30px 100px;
+    font-weight: bold;
+}
+
+.game-over button {
+    margin: 30px 100px;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.correctAnswer {
+    background-color: greenyellow;
+    color: greenyellow;
+}
+
+@media (min-width: 800px) {
+    body, .game-over {
+        padding: 0px;
+        margin: 0px, auto;
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* width: 100vh;
+        height: 100vh; */
+    }
+}
