@@ -4,14 +4,22 @@
 }
 
 body{
-    padding: 0px;
+    /*padding: 0px;
     margin: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center;*/
     width: 100vh;
     height: 100vh;
+}
+
+.quizEl .question{
+    display: flex;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center; 
 }
 
 h1{

@@ -68,6 +68,7 @@ let shuffledQuestion;
 let currentQuestionIndex;
 let correctAnswerScore;
 let wrongAnswerScore;
+let finalScore;
 
 const startButton = $('#start-btn');
 const nextButton = $('.next-btn');
@@ -92,10 +93,14 @@ const wrong = 'Wrong! Correct answer:' + ' '
 //document.ready function that allows player to start the quiz
 $(document).ready(() => {
     $('body').html(
-        `
+        `<div class="quizEl" id="quizEl">
         <h1>History Quiz</h1>
+        </div>
+        <div class="question id="question">
         <p>Test your knowledge of modern history with this short quiz.</p>
         <button class="start-btn" id="start-btn">Start Quiz</button>
+        </div>
+        </div>
         `
     )
     startQuiz();
@@ -103,10 +108,10 @@ $(document).ready(() => {
 
 //function that listens for the start button click and then displays the first question
 function startQuiz(){
-    currentQuestionIndex = 0;
-    correctAnswerScore = 0;
-    wrongAnswerScore = 0;
     $('#start-btn').on('click', () => {
+        currentQuestionIndex = 0;
+        correctAnswerScore = 0;
+        wrongAnswerScore = 0;
         console.log('start btn clicked');
         displayQuestions();
         //checkAnswer();
@@ -114,7 +119,7 @@ function startQuiz(){
     })
 }
 
-//function that displays questions
+//function that displays questions or the final results
 function displayQuestions(){
     currentQuestionIndex;
         $('body').html(
@@ -136,12 +141,13 @@ function displayQuestions(){
             </div>
             `
         )
-    checkAnswer();
+    checkAnswer();        
 }
 
 //function that checks answers
 function checkAnswer(){
     currentQuestionIndex;
+    if (currentQuestionIndex < store.questions.length-1){
     console.log('check answer function running');
     $('button').click(function(){
         //check that it's working
@@ -177,7 +183,94 @@ function checkAnswer(){
             displayQuestions();
         })
     })
+ }
+ else {
+    $('button').click(function(){
+        //check that it's working
+        console.log('button clicked');
+        //compare the button with correct answer
+        if($(this).text() === store.questions[currentQuestionIndex].correctAnswer){
+            //correctAnswerScore++
+            $('#scoreEl').prepend(
+                `<p>Correct!</p>
+                <button id="score" clas="score">Grade Me</button>
+                `
+            );
+            correctAnswerScore++
+            console.log(correctAnswerScore);
+            $('h4').text(
+                `Right: ${correctAnswerScore} Wrong: ${wrongAnswerScore}`
+            );
+            finalScore = correctAnswerScore;
+            $('#score').click(function(){
+                $('body').html(showResults());
+             })
+
+        }
+        else{
+            wrongAnswerScore++;
+            console.log(wrongAnswerScore);
+            $('#scoreEl').prepend(
+                `<p>Sorry. The correct answer is ${store.questions[currentQuestionIndex].correctAnswer}</p>
+                 <button id="score" clas="score">Grade Me</button>
+                `)
+            $('h4').text(
+                `Right: ${correctAnswerScore} Wrong: ${wrongAnswerScore}`
+            );
+            finalScore = correctAnswerScore;
+            $('#score').click(function(){
+                $('body').html(showResults());
+             })
+        }
+         
+    })
+
+ }
 }
+
+    
+
+
+//function displays the last page of the quiz that grades them based on their results.
+//The function will also allow users to try again. 
+function showResults (){
+    correctAnswerScore;
+    let score;
+    if (correctAnswerScore = 6){
+        score = 'You are a true hisory buff!)';
+    }
+    
+    if (correctAnswerScore = 5){
+        score = 'Awesome! Your knowledge of history is above average!';
+    }
+
+    if (correctAnswerScore = 4){
+        score = 'You passed, but you might want to take a refresher course';
+    }
+ 
+    else {
+        score = 'You failed. Hit the books and try again.';
+    }
+    
+    $('body').html(
+        `
+        <div class="quizEl" id="quizEl">
+        <div class="question id="question">
+        <h2>Score</h2>
+        </div>
+        <div class="answers" id="answers">
+        <h3>You answered ${finalScore} out of ${store.questions.length} questions correctly.</h3>
+        <h3>${score}</h3>
+        </div>
+        <div class="scoreEl" id="scoreEl">
+        <button class="start-btn" id="start-btn">Try again</button>
+        </div>
+        </div>
+        `
+    
+    )
+    startQuiz();
+}    
 
 
 // function checkAnswer(){
